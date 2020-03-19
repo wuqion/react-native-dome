@@ -57,5 +57,7 @@ ios部分有时候需要手动pod install ,找不到问题的时候，可以试�
 ```
 导航插件文档
 https://reactnavigation.org/docs/bottom-tab-navigator
+轮播图
+https://github.com/leecade/react-native-swiper
 
 ```
