@@ -3,42 +3,59 @@ import {
     View,
     Text,
     Button,
-    Alert
+    TextInput,
+    navigate
 } from 'react-native';
 
 export default class DetailsScreen extends React.Component
 {
+    
     constructor(){
         super()
         this.state={
-            obj:'dd'
+            obj:'dd',
+            text:'',
+            itemId:''
         }
         // console.log(this.props.navigation)
     }
-    render(){
-        const {itemId, otherParam} = this.props.route.params;
+    componentDidMount(){
+
+
+        // this.props.navigation.state.params.text = "sdfsdf";
+        this.setState(()=>{
+            return{
+                itemId:this.props.route.params.itemId
+            }
+        })
+    }
+    
+    render(){        
        return(
         <View>
-            <Text>{itemId+'+'+otherParam}</Text>
-            <Button title="navigate跳转页面" onPress={()=>{
+            <TextInput value={this.state.itemId} style={{backgroundColor:'#999',marginLeft:20,marginRight:20,padding:5}} placeholder="占位文字"
+            onChangeText={(event)=>{
                 this.setState({
-                    obj:'gs'
+                    itemId:event
                 })
-                this.props.navigation.navigate('Details')
-                
+                this.props.route.params.itemId = event;
+              }}></TextInput>
+            <Button title="回传值" onPress={()=>{
+                this.props.navigation.navigate('HomeScreen',{
+                    itemId:this.state.itemId
+                })
             }}></Button>
-            <Button title="push跳转页面" onPress={()=>{
-                this.setState({
-                    obj:'gs'
-                })
-                this.props.navigation.push('Details')
-                
+            <Button title="navigate返回" onPress={()=>{
+                this.props.navigation.navigate('HomeScreen');
             }}></Button>
             <Button title="goBack返回" onPress={()=>{
                 this.props.navigation.goBack();
             }}></Button>
-            <Button title="navigate返回" onPress={()=>{
-                this.props.navigation.navigate('Home');
+            <Button title="push首页面" onPress={()=>{
+                this.props.navigation.push('HomeScreen');
+            }}></Button>
+            <Button title="跳转发现页面" onPress={()=>{
+                this.props.navigation.push('FindScreens');
             }}></Button>
         </View>
     )}

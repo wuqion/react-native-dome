@@ -4,6 +4,8 @@ import {
   Text,
   StyleSheet,
   Image,
+  Button,
+  TextInput,
   Dimensions
 } from 'react-native';
 
@@ -33,38 +35,48 @@ export default class HomeScreen extends React.Component {
       images:[
         {src:require('../../images/home/in_14.jpg'),title:'会员中心',des:'立享会员福利'},
         {src:require('../../images/home/in_15.jpg'),title:'爱旅行',des:'分享旅行乐趣'}
-      ]
+      ],
+      text:''
       
     }
   }
-  componentWillMount() {
-    fetch('http://rap2.taobao.org:38080/app/mock/247672/homo')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          swiper: responseJson.swiper
-        })
-        console.log(responseJson.swiper)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+componentWillReceiveProps(nextProps){
+  alert("回传:"+JSON.stringify(nextProps.route.params));
+  if(nextProps.route.params.itemId){
+    this.setState(()=>{
+      return{
+        text:nextProps.route.params.itemId
+      }
+    })
   }
-  ceshi(){
-    // alert('ddd');
-  }
+}
+  // componentWillMount() {
+
+    // fetch('http://rap2.taobao.org:38080/app/mock/247672/homo')
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     this.setState({
+    //       swiper: responseJson.swiper
+    //     })
+    //     console.log(responseJson.swiper)
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+  // }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.wrapper}>
           <Swiper showsButtons={false} autoplay={true}>
             <View>
-              <Image style={styles.slide_image} onLoad={this.ceshi}
+              <Image style={styles.slide_image}
                 source={{ uri: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584638767208&di=93a6e8c3a4ec8efbe09b06ecd255fcce&imgtype=0&src=http%3A%2F%2Fimage.hnol.net%2Fc%2F2016-03%2F31%2F16%2F201603311627201261-2089977.jpg' }}></Image>
               <Text style={styles.slide_title}>标题</Text>
             </View>
             <View>
-              <Image style={styles.slide_image} onLoad={this.ceshi}
+              <Image style={styles.slide_image}
                 source={{ uri: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584638767206&di=de2d7277cb423125e1dac0fb1af8cdc9&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fpic%2F4%2F77%2Fc445755754.jpg' }}></Image>
               <Text style={styles.slide_title}>标题</Text>
             </View>
@@ -74,7 +86,7 @@ export default class HomeScreen extends React.Component {
           
           {
             this.state.arr_icons.map((item)=>{
-              return  <View style={styles.styleItem}>
+              return  <View style={styles.styleItem} key={item.title}>
                             <Image style={styles.styleItem_img} source={item.src}></Image>
                             <Text style={styles.styleItem_title}>{item.title}</Text>
                       </View>
@@ -99,6 +111,18 @@ export default class HomeScreen extends React.Component {
             })  
           }
         </View>
+        <TextInput style={{backgroundColor:'#999',marginLeft:20,marginRight:20,padding:5}} placeholder="占位文字"
+        value={this.state.text}
+        onChangeText={(event)=>{
+          this.setState(()=>{
+            return {text:event}
+          });
+        }}></TextInput>
+        <Button title="跳转" onPress={()=>{
+          this.props.navigation.push('DetailsScreen',{
+            itemId:this.state.text
+          });
+        }}></Button>
       </View>
     )
   }

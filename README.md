@@ -83,4 +83,7 @@ import LinearGradient from 'react-native-linear-gradient';
 </LinearGradient>
 
 ```
+
+回传值在这个生命周期里收取，值在nextProps里面
+componentWillReceiveProps(nextProps){
                             

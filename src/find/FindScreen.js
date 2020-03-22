@@ -8,18 +8,12 @@ import {
 
 export default class FindScreen extends React.Component
 {
-    constructor(){
-        super()
-        this.state={
-            obj:'dd'
-        }
-    }
     render(){
         
        return(
         <View>
-            <Button title="跳转首页" onPress={()=>{
-                this.props.navigation.navigate('Home');
+            <Button title="跳转二级" onPress={()=>{
+                this.props.navigation.navigate('FindScreens');
             }}></Button>
         </View>
     )}

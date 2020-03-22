@@ -13,6 +13,8 @@ import HomeScreen from './home/HomeScreen';
 import DetailsScreen from './home/details/DetailsScreen';
 
 import FindScreen from './find/FindScreen';
+import FindScreens from './find/FindScreens';
+
 
 import CenterScreen from './center/CenterScreen'
 const tabsImage = {
@@ -43,6 +45,7 @@ function Find() {
     return (
         <FindStack.Navigator>
             <FindStack.Screen name="FindScreen" component={FindScreen} />
+            <FindStack.Screen name="FindScreens" component={FindScreens} />
         </FindStack.Navigator>
     )
 }
