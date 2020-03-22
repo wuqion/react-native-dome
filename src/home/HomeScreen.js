@@ -2,13 +2,13 @@ import React from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   Image,
   Dimensions
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
+import LinearGradient from 'react-native-linear-gradient';
 
 const deviceWidth = Dimensions.get('window').width;      //设备的宽度
 
@@ -16,7 +16,25 @@ export default class HomeScreen extends React.Component {
   constructor() {
     super()
     this.state = {
-      swiper: []
+      swiper: [],
+      // 
+      arr_icons : [//分类 
+        { src: require("../../images/home/in_01.jpg"), title: "出境游" },
+        { src: require("../../images/home/in_02.jpg"), title: "国内游" },
+        { src: require("../../images/home/in_03.jpg"), title: "签证" },
+        { src: require("../../images/home/in_04.jpg"), title: "邮轮" },
+        { src: require("../../images/home/in_09.jpg"), title: "定制游"},
+        { src: require("../../images/home/in_05.jpg"), title: "机票" },
+        { src: require("../../images/home/in_06.jpg"), title: "酒店" },
+        { src: require("../../images/home/in_07.jpg"), title: "门票车票" },
+        { src: require("../../images/home/in_08.jpg"), title: "当地游" },
+        { src: require("../../images/home/in_10.jpg"), title: "火车票" }
+      ],
+      images:[
+        {src:require('../../images/home/in_14.jpg'),title:'会员中心',des:'立享会员福利'},
+        {src:require('../../images/home/in_15.jpg'),title:'爱旅行',des:'分享旅行乐趣'}
+      ]
+      
     }
   }
   componentWillMount() {
@@ -36,7 +54,6 @@ export default class HomeScreen extends React.Component {
     // alert('ddd');
   }
   render() {
-    console.log(this)
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.wrapper}>
@@ -53,12 +70,80 @@ export default class HomeScreen extends React.Component {
             </View>
           </Swiper>
         </View>
-
+        <View style={{backgroundColor:'#fff',flexDirection:'row',flexWrap:'wrap'}}>
+          
+          {
+            this.state.arr_icons.map((item)=>{
+              return  <View style={styles.styleItem}>
+                            <Image style={styles.styleItem_img} source={item.src}></Image>
+                            <Text style={styles.styleItem_title}>{item.title}</Text>
+                      </View>
+            })  
+          }
+        </View>
+        <View style={{flexDirection:'row'}}>
+          {
+            this.state.images.map((item)=>{
+              return  <View style={styles.styleImages}>
+                            <Image style={styles.styleImages_img} source={item.src}></Image>
+                            <View style={{position:"absolute",flexDirection:'row',left:15,top:20}}>
+                              <View style={{height:'100%',width:4,backgroundColor:'red',borderRadius:3,marginRight:3}}></View>
+            <Text style={{fontWeight:'bold',fontSize:16}}>{item.title}</Text>
+                            </View>
+                            <LinearGradient style={{width:'auto',position:'absolute',left:15,top:45,borderRadius:10}} colors={['#ff3939', '#ff7830']} start={{x: 0, y: 0}} end={{x: 1, y: 0}}>
+                              <Text style={{color:"#fff",height:13,textAlign:'center',fontSize:10,marginTop:3,marginRight:5,marginLeft:5}}>
+                              {item.des}
+                              </Text>
+                            </LinearGradient>
+                      </View>
+            })  
+          }
+        </View>
       </View>
     )
   }
 }
+const item_size = deviceWidth*0.2-20;
+
 const styles = StyleSheet.create({
+  styleItem:{
+    padding:10,
+  },
+  styleItem_img:{
+    height:item_size,
+    width:item_size,
+  },
+  styleItem_title:{
+    textAlign:'center',
+    marginTop:10,
+    fontSize:15
+  },
+  styleImages:{
+    width:'50%',
+    padding:10,
+    
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    
+    shadowColor:'#999',
+    shadowOpacity:9,
+  },
+  styleImages_img:{
+    width:'100%',
+    height:70,
+    resizeMode:'stretch',
+    borderRadius:5
+
+    // shadowOffset: {
+    //   width: 3,
+    //   height: 3
+    // },
+    
+    // shadowColor:'red',
+    // shadowRadius:9
+  },
   wrapper: {
     width: deviceWidth,
     height: 200

@@ -57,7 +57,30 @@ ios部分有时候需要手动pod install ,找不到问题的时候，可以试�
 ```
 导航插件文档
 https://reactnavigation.org/docs/bottom-tab-navigator
+
 轮播图
 https://github.com/leecade/react-native-swiper
 
+渐变
+https://github.com/react-native-community/react-native-linear-gradient/blob/master/README.md
 ```
+渐变使用步骤
+```
+react-native-linear-gradient
+
+命令
+yarn add react-native-linear-gradient
+进入ios目录
+pod install
+
+编辑代码
+import LinearGradient from 'react-native-linear-gradient';
+
+<LinearGradient colors={['#ff3939', '#ff7830']} start={{x: 0, y: 0}} end={{x: 1, y: 0}}>
+    <Text style={styles.buttonText}>
+    立享会员福利
+    </Text>
+</LinearGradient>
+
+```
+                            
