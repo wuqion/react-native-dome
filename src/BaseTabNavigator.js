@@ -35,8 +35,8 @@ const CenterStack = createStackNavigator();
 
 function Home() {
     return (
-        <HomeStack.Navigator>
-            <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+        <HomeStack.Navigator initialRouteName="HomeScreen"> 
+            <HomeStack.Screen name="HomeScreen" component={HomeScreen}  options={{headerMode:"none",headerShown:false}}/>
             <HomeStack.Screen name="DetailsScreen" component={DetailsScreen} />
         </HomeStack.Navigator>
     )
@@ -44,7 +44,7 @@ function Home() {
 function Find() {
     return (
         <FindStack.Navigator>
-            <FindStack.Screen name="FindScreen" component={FindScreen} />
+            <FindStack.Screen name="FindScreen" component={FindScreen}  options={{ title: '发现' }}/>
             <FindStack.Screen name="FindScreens" component={FindScreens} />
         </FindStack.Navigator>
     )
@@ -52,7 +52,7 @@ function Find() {
 function Center() {
     return (
         <CenterStack.Navigator>
-            <CenterStack.Screen name="CenterScreen" component={CenterScreen} />
+            <CenterStack.Screen name="CenterScreen" component={CenterScreen} options={{ title: '个人' }}/>
         </CenterStack.Navigator>
     )
 }
@@ -60,7 +60,7 @@ function Center() {
 export default class BaseTabNavigator extends React.Component {
     render() {
         return (
-            <NavigationContainer>
+            <NavigationContainer displayName="dd"  >
                 <Tab.Navigator  tabBarOptions={{
                     activeTintColor: '#1afa29',
                     inactiveTintColor: '#999',
