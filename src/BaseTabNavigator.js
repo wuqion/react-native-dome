@@ -2,7 +2,8 @@ import React from 'react'
 import {
     View,
     Text,
-    Image
+    Image,
+    Platform
 } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,7 +18,14 @@ import FindScreens from './find/FindScreens';
 
 
 import CenterScreen from './center/CenterScreen'
-const tabsImage = {
+const tabsImage = Platform.OS == 'web'?{
+    home : '../images/tabs/on/home.png',
+    homeSelect : '../images/tabs/select/home.png',
+    find : '../images/tabs/on/danyehuaban.png',
+    findSelect : '../images/tabs/select/danyehuaban.png',
+    center : '../images/tabs/on/geren.png',
+    centerSelect : '../images/tabs/select/geren.png'
+}:{
     home : require('../images/tabs/on/home.png'),
     homeSelect : require('../images/tabs/select/home.png'),
     find : require('../images/tabs/on/danyehuaban.png'),
@@ -65,23 +73,23 @@ export default class BaseTabNavigator extends React.Component {
                     activeTintColor: '#1afa29',
                     inactiveTintColor: '#999',
                     }}>
-                    <Tab.Screen name="Home" component={Home} options={{
+                    <Tab.Screen name="Home" component={HomeScreen} options={{
                         title: '首页',
                         tabBarIcon: ({ color, size, focused }) => (
-                            <Image source={focused?tabsImage.home:tabsImage.homeSelect}></Image>
+                            <Image style={{height:20,width:20}} source={focused?tabsImage.home:tabsImage.homeSelect}></Image>
                         ),
 
                     }} />
-                    <Tab.Screen name="find" component={Find} options={{
+                    <Tab.Screen name="find" component={FindScreen} options={{
                         tabBarLabel: '发现',
                         tabBarIcon: ({ color, size, focused }) => (
-                            <Image source={focused?tabsImage.find:tabsImage.findSelect}></Image>
+                            <Image style={{height:20,width:20}} source={focused?tabsImage.find:tabsImage.findSelect}></Image>
                         ),
                     }}/>
                     <Tab.Screen name="center" component={Center} options={{
                         tabBarLabel:'个人',
                         tabBarIcon:({focused})=>(
-                            <Image source={focused?tabsImage.center:tabsImage.centerSelect}></Image>
+                            <Image style={{height:20,width:20}} source={focused?tabsImage.center:tabsImage.centerSelect}></Image>
                         )
                     }} />
                 </Tab.Navigator>

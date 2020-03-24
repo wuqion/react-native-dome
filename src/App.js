@@ -12,7 +12,8 @@ import {
   Text
 } from 'react-native';
 
-import BaseTabNavigator from './src/BaseTabNavigator'
+import 'react-native-gesture-handler';
+import BaseTabNavigator from './BaseTabNavigator';
 
 const App: () => React$Node = () => {
   return (

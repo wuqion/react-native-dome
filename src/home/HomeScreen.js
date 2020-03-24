@@ -6,13 +6,38 @@ import {
   Image,
   Button,
   TextInput,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 
 const deviceWidth = Dimensions.get('window').width;      //设备的宽度
+
+const icons = Platform.OS == 'web'?[//分类 
+  { src: "../../images/home/in_01.jpg", title: "出境游" },
+  { src: "../../images/home/in_02.jpg", title: "国内游" },
+  { src: "../../images/home/in_03.jpg", title: "签证" },
+  { src: "../../images/home/in_04.jpg", title: "邮轮" },
+  { src: "../../images/home/in_09.jpg", title: "定制游"},
+  { src: "../../images/home/in_05.jpg", title: "机票" },
+  { src: "../../images/home/in_06.jpg", title: "酒店" },
+  { src: "../../images/home/in_07.jpg", title: "门票车票" },
+  { src: "../../images/home/in_08.jpg", title: "当地游" },
+  { src: "../../images/home/in_10.jpg", title: "火车票" }
+]:[//分类 
+  { src: require("../../images/home/in_01.jpg"), title: "出境游" },
+  { src: require("../../images/home/in_02.jpg"), title: "国内游" },
+  { src: require("../../images/home/in_03.jpg"), title: "签证" },
+  { src: require("../../images/home/in_04.jpg"), title: "邮轮" },
+  { src: require("../../images/home/in_09.jpg"), title: "定制游"},
+  { src: require("../../images/home/in_05.jpg"), title: "机票" },
+  { src: require("../../images/home/in_06.jpg"), title: "酒店" },
+  { src: require("../../images/home/in_07.jpg"), title: "门票车票" },
+  { src: require("../../images/home/in_08.jpg"), title: "当地游" },
+  { src: require("../../images/home/in_10.jpg"), title: "火车票" }
+];
 
 export default class HomeScreen extends React.Component {
   constructor() {
@@ -20,21 +45,10 @@ export default class HomeScreen extends React.Component {
     this.state = {
       swiper: [],
       // 
-      arr_icons : [//分类 
-        { src: require("../../images/home/in_01.jpg"), title: "出境游" },
-        { src: require("../../images/home/in_02.jpg"), title: "国内游" },
-        { src: require("../../images/home/in_03.jpg"), title: "签证" },
-        { src: require("../../images/home/in_04.jpg"), title: "邮轮" },
-        { src: require("../../images/home/in_09.jpg"), title: "定制游"},
-        { src: require("../../images/home/in_05.jpg"), title: "机票" },
-        { src: require("../../images/home/in_06.jpg"), title: "酒店" },
-        { src: require("../../images/home/in_07.jpg"), title: "门票车票" },
-        { src: require("../../images/home/in_08.jpg"), title: "当地游" },
-        { src: require("../../images/home/in_10.jpg"), title: "火车票" }
-      ],
+      arr_icons : icons,//分类 
       images:[
-        {src:require('../../images/home/in_14.jpg'),title:'会员中心',des:'立享会员福利'},
-        {src:require('../../images/home/in_15.jpg'),title:'爱旅行',des:'分享旅行乐趣'}
+        {src:Platform.OS == 'web'?'../../images/home/in_14.jpg':require('../../images/home/in_14.jpg'),title:'会员中心',des:'立享会员福利'},
+        {src:Platform.OS == 'web'?'../../images/home/in_15.jpg':require('../../images/home/in_15.jpg'),title:'爱旅行',des:'分享旅行乐趣'}
       ],
       text:''
       
@@ -77,7 +91,7 @@ componentWillReceiveProps(nextProps){
             </View>
             <View>
               <Image style={styles.slide_image}
-                source={{ uri: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584638767206&di=de2d7277cb423125e1dac0fb1af8cdc9&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fpic%2F4%2F77%2Fc445755754.jpg' }}></Image>
+                source={{ uri: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584638767206&di=de2d7277cb423125e1dac0fb1af8cdc9&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fpic%2F4%2F77%2Fc445755754.jpg'}}></Image>
               <Text style={styles.slide_title}>标题</Text>
             </View>
           </Swiper>
@@ -96,17 +110,17 @@ componentWillReceiveProps(nextProps){
         <View style={{flexDirection:'row'}}>
           {
             this.state.images.map((item)=>{
-              return  <View style={styles.styleImages}>
+              return  <View style={styles.styleImages} key={item.src}>
                             <Image style={styles.styleImages_img} source={item.src}></Image>
                             <View style={{position:"absolute",flexDirection:'row',left:15,top:20}}>
                               <View style={{height:'100%',width:4,backgroundColor:'red',borderRadius:3,marginRight:3}}></View>
             <Text style={{fontWeight:'bold',fontSize:16}}>{item.title}</Text>
                             </View>
-                            <LinearGradient style={{width:'auto',position:'absolute',left:15,top:45,borderRadius:10}} colors={['#ff3939', '#ff7830']} start={{x: 0, y: 0}} end={{x: 1, y: 0}}>
+                            {/* <LinearGradient style={{width:'auto',position:'absolute',left:15,top:45,borderRadius:10}} colors={['#ff3939', '#ff7830']} start={{x: 0, y: 0}} end={{x: 1, y: 0}}>
                               <Text style={{color:"#fff",height:13,textAlign:'center',fontSize:10,marginTop:3,marginRight:5,marginLeft:5}}>
                               {item.des}
                               </Text>
-                            </LinearGradient>
+                            </LinearGradient> */}
                       </View>
             })  
           }
@@ -140,7 +154,7 @@ const styles = StyleSheet.create({
   styleItem_title:{
     textAlign:'center',
     marginTop:10,
-    fontSize:15
+    fontSize:13
   },
   styleImages:{
     width:'50%',
@@ -179,7 +193,7 @@ const styles = StyleSheet.create({
       bottom: 0
   },
   slide_image:{
-    height: '100%', 
-    width: '100%'
+    height: 200, 
+    width: deviceWidth
   }
 })
