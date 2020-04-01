@@ -133,7 +133,7 @@ componentWillReceiveProps(nextProps){
           });
         }}></TextInput>
         <Button title="跳转" onPress={()=>{
-          this.props.navigation.push('DetailsScreen',{
+          this.props.navigation.push('Details',{
             itemId:this.state.text
           });
         }}></Button>

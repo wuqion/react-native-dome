@@ -13,7 +13,7 @@ export default class FindScreen extends React.Component
        return(
         <View>
             <Button title="跳转二级" onPress={()=>{
-                this.props.navigation.navigate('FindScreens');
+                this.props.navigation.navigate('Finds');
             }}></Button>
         </View>
     )}

@@ -23,11 +23,14 @@ export default class DetailsScreen extends React.Component
 
 
         // this.props.navigation.state.params.text = "sdfsdf";
-        this.setState(()=>{
-            return{
-                itemId:this.props.route.params.itemId
-            }
-        })
+        if(this.props.route.params){
+            this.setState(()=>{
+                return{
+                    itemId:this.props.route.params.itemId
+                }
+            })
+        }
+        
     }
     
     render(){        
@@ -41,21 +44,24 @@ export default class DetailsScreen extends React.Component
                 this.props.route.params.itemId = event;
               }}></TextInput>
             <Button title="回传值" onPress={()=>{
-                this.props.navigation.navigate('HomeScreen',{
+                this.props.navigation.navigate('Home',{
                     itemId:this.state.itemId
                 })
             }}></Button>
             <Button title="navigate返回" onPress={()=>{
-                this.props.navigation.navigate('HomeScreen');
+                this.props.navigation.navigate('Home');
             }}></Button>
             <Button title="goBack返回" onPress={()=>{
                 this.props.navigation.goBack();
             }}></Button>
             <Button title="push首页面" onPress={()=>{
-                this.props.navigation.push('HomeScreen');
+                this.props.navigation.push('Root',{
+                    screen:'Home',
+                    itemId:this.state.itemId
+                });
             }}></Button>
             <Button title="跳转发现页面" onPress={()=>{
-                this.props.navigation.push('FindScreens');
+                this.props.navigation.push('Finds');
             }}></Button>
         </View>
     )}

@@ -15,7 +15,7 @@ export default class FindsScreen extends React.Component
        return(
         <View>
             <Button title="navigate跳转首页" onPress={()=>{
-                this.props.navigation.navigate('HomeScreen')            
+                this.props.navigation.navigate('Home')            
             }}></Button>
         </View>
     )}

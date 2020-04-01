@@ -80,5 +80,13 @@ module.exports = {
     // module implementations should be written in files using the extension
     // `.web.js`.
     extensions: [ '.web.js', '.js' ]
-  }
+  },
+  devServer: {
+    contentBase: path.resolve(appDirectory, 'dist'), //本地服务器所加载的页面所在的目录
+    port: 8050,
+    open: true,
+    publicPath: '/',
+    historyApiFallback: true, //不跳转
+    inline: true, //实时刷新
+  },
 }
